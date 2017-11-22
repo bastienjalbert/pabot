@@ -5,6 +5,9 @@
 
 A parallel executor for [Robot Framework](http://www.robotframework.org) tests. With Pabot you can split one execution into multiple and save test execution time.
 
+This pabot version is optimized for android parallel testing. It copies all screenshots, even if they are in subfolder. 
+This version is used by the (future) android parallel test runner.
+
 Supported by [Reaktor](https://www.reaktor.com).
 
 ![Pabot Flow](https://www.dropbox.com/s/ct1qg10rpscum4n/pabot.JPG?dl=1)
@@ -21,6 +24,16 @@ From PyPi:
 OR clone this repository and run:
 
      setup.py  install
+
+## Use:
+
+From this directory directly:
+
+     python -m pabot.pabot
+
+OR from an installed version
+
+     pabot
 
 ## Things you should know
 

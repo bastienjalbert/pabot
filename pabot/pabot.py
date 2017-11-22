@@ -528,16 +528,21 @@ def _output_dir(options, cleanup=True):
 
 def _copy_screenshots(options):
     pabot_outputdir = _output_dir(options, cleanup=False)
-    outputdir = options.get('outputdir', '.')
+    # we're going to copy screenshots in an "img" folder 
+    outputdir = pabot_outputdir + "/../img/"
     for location, dir_names, file_names in os.walk(pabot_outputdir):
         for file_name in file_names:
             # We want ALL screenshots copied, not just selenium ones!
             if file_name.endswith(".png"):
+                # we're going to copy all screenshots, even if they are in subfolders.
                 prefix = os.path.relpath(location, pabot_outputdir)
-                # But not .png files in any sub-folders of "location"
-                if os.sep in prefix:
-                    continue
+                prefix = prefix.replace("/", "-")
+                # But not .png files in any sub-folders of "location", that's false now :D
+                # if os.sep in prefix:
+                #   continue
                 dst_file_name = '-'.join([prefix, file_name])
+                # we copy all files, even if they are in subfolder, and renamming them like this 
+                # X.TestSuiteName-appium-screenshot-y.png (X = index of device, y = appium screen number)
                 shutil.copyfile(os.path.join(location, file_name),
                                 os.path.join(outputdir, dst_file_name))
 
